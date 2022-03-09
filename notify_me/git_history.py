@@ -1,7 +1,7 @@
 from requests_html import HTMLSession
 from bs4 import BeautifulSoup
 from datetime import datetime
-from config import config
+from notify_me.config import config
 import pandas as pd
 import os
 
