@@ -69,14 +69,14 @@ class History(object):
 
         date, info = self.get_commit_history()
         df = pd.DataFrame(data=info, index=date)
-
-        # History already exists
+        
+        # History not exists
         if not os.path.exists(save_path):
 
             with open(save_path, 'a') as f:
                 df.to_csv(f, header=False)
             
-        # History not exists
+        # History already exists
         else:
             # append history
             pass
