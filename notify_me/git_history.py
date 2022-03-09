@@ -1,16 +1,16 @@
 from requests_html import HTMLSession
 from bs4 import BeautifulSoup
 from datetime import datetime
-from notify_me.config import config
+from config import crawl_config
 import pandas as pd
 import os
 
 class History(object):
         
     def __init__(self):
-        self._url = config['url']
-        self._headers = config['headers']
-        self._params = config['params']
+        self._url = crawl_config['url']
+        self._headers = crawl_config['headers']
+        self._params = crawl_config['params']
         self._connection = False
         self._html = None
         self._soup = None
@@ -56,13 +56,16 @@ class History(object):
 
         today = datetime.today().strftime("%Y-%m-%d")           
         commit_comp = self.soup.find("rect", {"data-date" : today})
+        msg = None
 
         if commit_comp:
             commit_cnt = int(commit_comp.get('data-count'))
             if  commit_cnt == 0:
-                print("Commit Not Updated Today")
+                msg = "Commit Not Updated Today"
             else:
-                print("Commit Updated Today")
+                msg = "Commit Updated Today"
+        
+        return msg
                                 
                                 
     def update_history(self, save_path):
